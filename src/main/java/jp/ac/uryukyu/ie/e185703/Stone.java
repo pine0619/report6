@@ -2,8 +2,8 @@ package jp.ac.uryukyu.ie.e185703;
 
 
 public class Stone {
-    int x;
-    int y;
+    private int x;
+    private int y;
     private String color;//B:黒, W:白, E:空
 
     /**
@@ -31,6 +31,11 @@ public class Stone {
      */
     public String getColor(){
         return color;
+    }
+
+    public int[] getPosition(){
+        int pos[] = {this.x, this.y};
+        return pos;
     }
 
 }
