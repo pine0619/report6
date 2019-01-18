@@ -14,11 +14,11 @@ public class Stone {
     public Stone(int x, int y){
         this.x = x;
         this.y = y;
-        color = "E";
+        color = null;
     }
 
     /**
-     * 石の色を指定するメソッド
+     * 石の色を指定するメソッド。
      * @param color　変えたい色(B:黒, W:白, E:空)
      */
     public void setColor(String color){
@@ -26,13 +26,17 @@ public class Stone {
     }
 
     /**
-     * 石の色を返すメソッド
+     * 石の色を返すメソッド。
      * @return 石の色
      */
     public String getColor(){
         return color;
     }
 
+    /**
+     * 石があるマスの座標を返すメソッド。
+     * @return 石があるマスの座標。
+     */
     public int[] getPosition(){
         int pos[] = {this.x, this.y};
         return pos;
