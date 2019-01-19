@@ -67,13 +67,13 @@ public class Field {
                 board[y][x] = this.getStone(x, y).getColor();
             }
         }
-        System.out.println("  1 2 3 4 5 6 7 8 x");
+        System.out.println("    1   2   3   4   5   6   7   8  x");
         for(int y = 1; y <= 8; y++){
             System.out.print(y);
             for(int x = 1; x <= 8; x++){
-                System.out.printf("%2s", board[y][x]);
+                System.out.printf("%4s", board[y][x]);
             }
-            System.out.printf("\n");
+            System.out.printf("\n\n");
         }
         System.out.println("y");
     }
@@ -111,6 +111,7 @@ public class Field {
      */
     public void turnStone(String color){
         printBoard();
+        System.out.println("あなたの色は" + color + "です。");
         Coordinate input = new Coordinate();
         //指定したマスの色が"E"かどうか。
         if(getStone(input.x, input.y).getColor() != "E"){
@@ -140,6 +141,46 @@ public class Field {
     }
 
     public void cpuTurnStone(String color){
+        List<Stone> list = judgeExistCanReverseStone(color);
+        Random rand = new Random();
+        int index = rand.nextInt(list.size());
+        Stone stone = list.get(index);
+        int xnum = stone.getPosition()[0];
+        int ynum = stone.getPosition()[1];
+        changeStoneColor(xnum, ynum, color);
+        for(int i = -1; i <= 1; i++){
+            for(int j = -1; j <= 1; j++){
+                for(int k = 1; k <= judgeReverse(xnum, ynum, j, i, color); k++){
+                    changeStoneColor(xnum + j * k, ynum + i * k, color);
+                }
+            }
+        }
+    }
+
+    public void judgeWinner(){
+        int numBlackStone = 0;
+        int numWhiteStone = 0;
+        for(int y = 1; y <= 8; y ++){
+            for(int x = 1; x <= 8; x++){
+                if(getStone(x, y).getColor() == "○"){
+                    numBlackStone++;
+                }else if(getStone(x, y).getColor() == "●"){
+                    numWhiteStone++;
+                }
+            }
+        }
+        printBoard();
+        System.out.println("○ :" + numBlackStone + "　VS　" +  "● :" + numWhiteStone);
+        if(numBlackStone > numWhiteStone){
+            System.out.println("あなたの勝ちです！");
+        }else if(numBlackStone == numWhiteStone){
+            System.out.println("同点です！");
+        }else{
+            System.out.println("CPUの勝ちです！");
+        }
+    }
+
+    public List<Stone> judgeExistCanReverseStone(String color){
         List<Stone> cansReverseStoneList = new ArrayList<Stone>();
         for(int y = 1; y < 9; y++){
             for(int x = 1; x < 9; x++){
@@ -162,19 +203,7 @@ public class Field {
                 }
             }
         }
-        Random rand = new Random();
-        int index = rand.nextInt(cansReverseStoneList.size());
-        Stone stone = cansReverseStoneList.get(index);
-        int xnum = stone.getPosition()[0];
-        int ynum = stone.getPosition()[1];
-        changeStoneColor(xnum, ynum, color);
-        for(int i = -1; i <= 1; i++){
-            for(int j = -1; j <= 1; j++){
-                for(int k = 1; k <= judgeReverse(xnum, ynum, j, i, color); k++){
-                    changeStoneColor(xnum + j * k, ynum + i * k, color);
-                }
-            }
-        }
+        return cansReverseStoneList;
     }
 
 }
