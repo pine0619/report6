@@ -140,6 +140,11 @@ public class Field {
         }
     }
 
+    /**
+     * turnStoneのCPU版。
+     * 石が置けるマスをリストに入れ、そのなかからランダムにマスを選ぶ。
+     * @param color　自分の色
+     */
     public void cpuTurnStone(String color){
         List<Stone> list = judgeExistCanReverseStone(color);
         Random rand = new Random();
@@ -157,6 +162,9 @@ public class Field {
         }
     }
 
+    /**
+     * 勝敗を判定するメソッド。
+     */
     public void judgeWinner(){
         int numBlackStone = 0;
         int numWhiteStone = 0;
@@ -180,6 +188,11 @@ public class Field {
         }
     }
 
+    /**
+     * 石が置けるマスのリストを作るメソッド。
+     * @param color　自分の色
+     * @return 置けるマスが入ったリスト
+     */
     public List<Stone> judgeExistCanReverseStone(String color){
         List<Stone> cansReverseStoneList = new ArrayList<Stone>();
         for(int y = 1; y < 9; y++){
