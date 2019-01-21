@@ -4,7 +4,7 @@ package jp.ac.uryukyu.ie.e185703;
 public class Stone {
     private int x;
     private int y;
-    private String color;//B:黒, W:白, E:空
+    private String color;//B:黒, W:白, E:空　null:おけない場所（盤面外）
 
     /**
      * コンストラクタ。石の座標と色(空を表す"E")を指定する。

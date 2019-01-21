@@ -24,6 +24,7 @@ public class Field {
                 getStone(x, y).setColor("E");
             }
         }
+        //初期盤面の4コマを置く
         changeStoneColor(4,4,"●");
         changeStoneColor(5,5, "●");
         changeStoneColor(5, 4, "○");
